@@ -1,4 +1,4 @@
-window.promises = [];
+// window.promises = [];
 function getRandomTime() {
   return Math.floor(Math.random() * 5) * 1000 + 1000; // Random time between 1 and 5 seconds
 }
