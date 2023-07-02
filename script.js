@@ -1,28 +1,22 @@
-// window.promises = [];
-function getRandomTime() {
-  return Math.floor(Math.random() * 5) * 1000 + 1000; // Random time between 1 and 5 seconds
-}
-
-function createPromise() {
-  return new Promise((resolve) => {
-    const time = getRandomTime();
-    setTimeout(() => {
-      resolve(`Promise resolved after ${time / 1000} seconds`);
-    }, time);
-  });
-}
-
-const promises = Array.from({ length: 5 }, createPromise);
-const outputDiv = document.getElementById("output");
+const promises = [
+  new Promise((resolve) => setTimeout(resolve, getRandomTime())),
+  new Promise((resolve) => setTimeout(resolve, getRandomTime())),
+  new Promise((resolve) => setTimeout(resolve, getRandomTime())),
+  new Promise((resolve) => setTimeout(resolve, getRandomTime())),
+  new Promise((resolve) => setTimeout(resolve, getRandomTime())),
+];
 
 Promise.any(promises)
   .then((result) => {
-    outputDiv.textContent = result;
+    const outputDiv = document.getElementById("output");
+    outputDiv.textContent = `The first promise resolved with result: ${result}`;
   })
   .catch((error) => {
-    console.error(error);
+    const outputDiv = document.getElementById("output");
+    outputDiv.textContent = `All promises rejected: ${error}`;
   });
 
+function getRandomTime() {
+  return Math.floor(Math.random() * 5000) + 1000; // Random time between 1 and 5 seconds
+}
 
-// Do not change the code above this
-// add your promises to the array `promises`
